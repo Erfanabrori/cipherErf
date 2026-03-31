@@ -1,0 +1,16 @@
+body{
+display:flex;
+background:#f3f4f6;
+}
+
+.main{
+flex:1;
+padding:30px;
+transition:all 0.3s;
+}
+
+.icon{
+font-size:18px;
+width:22px;
+text-align:center;
+}

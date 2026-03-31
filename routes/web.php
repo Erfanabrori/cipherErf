@@ -17,3 +17,15 @@ Route::post('/login', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+Route::get('/caesar', function () {
+    return view('caesar');
+});
+
+Route::get('/hill', function () {
+    return view('hill');
+});
+
+Route::get('/vigenere', function () {
+    return view('vigenere');
+});
