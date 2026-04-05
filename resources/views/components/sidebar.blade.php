@@ -15,7 +15,7 @@
 <span class="text">Dashboard</span>
 </a>
 
-<a href="/profile">
+<a href="/profil">
 <i class="fa-solid fa-user icon"></i>
 <span class="text">Profile</span>
 </a>

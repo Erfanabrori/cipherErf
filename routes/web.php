@@ -18,6 +18,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
+Route::get('/profil', function () {
+    return view('profil');
+});
+
 Route::get('/caesar', function () {
     return view('caesar');
 });
