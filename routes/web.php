@@ -1,35 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\CaesarController;
 
-Route::get('/', function () {
-    return redirect('/login');
-});
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/login', function () {
-    return view('login');
-});
+Route::redirect('/', '/login');
 
-Route::post('/login', function () {
-    return redirect('/dashboard');
-});
+Route::get('/login', [PenggunaController::class, 'loginForm'])->name('login');
+Route::post('/login', [PenggunaController::class, 'login']);
+Route::get('/dashboard', [PenggunaController::class, 'dashboard'])->name('dashboard');
+Route::post('/logout', [PenggunaController::class, 'logout'])->name('logout');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+Route::get('/halo-maba-sti', [PenggunaController::class, 'index']);
+Route::post('/simpan-pengguna', [PenggunaController::class, 'create']);
 
-Route::get('/profil', function () {
-    return view('profil');
-});
-
-Route::get('/caesar', function () {
-    return view('caesar');
-});
-
-Route::get('/hill', function () {
-    return view('hill');
-});
-
-Route::get('/vigenere', function () {
-    return view('vigenere');
-});
+Route::get('/caesar/{jenis?}', [CaesarController::class, 'index']);
+Route::post('/caesar-process', [CaesarController::class, 'process']);
+Route::post('/caesar-process-json', [CaesarController::class, 'processJson']);

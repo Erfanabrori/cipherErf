@@ -35,7 +35,15 @@
 <span class="text">Vigenère Cipher</span>
 </a>
 
-</div>
+<a href="/logout" class="menu-item"
+   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    <i class="fa-solid fa-right-from-bracket icon"></i>
+    <span class="text">Logout</span>
+</a>
+
+<form id="logout-form" method="POST" action="/logout" style="display: none;">
+    @csrf
+</form>
 
 </div>
 

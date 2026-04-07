@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CipherController extends Controller
+class kriptoController extends Controller
 {
     public function index()
     {
