@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class kriptoController extends Controller
+class KriptoController extends Controller
 {
     public function index()
     {
-        return view('cipher');
+        return view('caesar');
     }
 
     public function process(Request $request)

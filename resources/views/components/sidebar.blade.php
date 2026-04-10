@@ -10,32 +10,34 @@
 
 <div class="menu">
 
-<a class="active" href="/dashboard">
+<a class="{{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
 <i class="fa-solid fa-chart-line icon"></i>
 <span class="text">Dashboard</span>
 </a>
 
-<a href="/profil">
+<a class="{{ request()->routeIs('profil') ? 'active' : '' }}" href="{{ route('profil') }}">
 <i class="fa-solid fa-user icon"></i>
 <span class="text">Profile</span>
 </a>
 
-<a href="/caesar">
+
+
+<a class="{{ request()->routeIs('caesar') ? 'active' : '' }}" href="{{ route('caesar') }}">
 <i class="fa-solid fa-key icon"></i>
 <span class="text">Caesar Cipher</span>
 </a>
 
-<a href="/hill">
+<a class="{{ request()->routeIs('hill') ? 'active' : '' }}" href="{{ route('hill') }}">
 <i class="fa-solid fa-table-cells icon"></i>
 <span class="text">Hill Cipher</span>
 </a>
 
-<a href="/vigenere">
+<a class="{{ request()->routeIs('vigenere') ? 'active' : '' }}" href="{{ route('vigenere') }}">
 <i class="fa-solid fa-lock icon"></i>
 <span class="text">Vigenère Cipher</span>
 </a>
 
-<a href="/logout" class="menu-item"
+<a href="{{ route('logout') }}" class="menu-item"
    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
     <i class="fa-solid fa-right-from-bracket icon"></i>
     <span class="text">Logout</span>
