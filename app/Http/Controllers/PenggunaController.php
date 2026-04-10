@@ -21,6 +21,7 @@ class PenggunaController extends Controller
         if ($user) {
             session([
                 'user' => $user->email,
+                'user_name' => $user->nama,
                 'id' => $user->id
             ]);
 
@@ -47,7 +48,8 @@ class PenggunaController extends Controller
 
     public function index()
     {
-        return view('daftarPengguna');
+        $pengguna = Pengguna::all();
+        return view('daftarPengguna', compact('pengguna'));
     }
 
     public function profil()

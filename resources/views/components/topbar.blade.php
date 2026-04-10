@@ -1,66 +1,89 @@
-<div class="hero">
+<div class="topbar-minimal">
+    <div class="topbar-content">
+        <div class="web-name">
+            <i class="fa-solid fa-key-skeleton"></i>
+            <span>Kriptografi Erf</span>
+        </div>
 
-    <div class="hero-text">
-        <h1>Web Kriptografi</h1>
-
-        <p>
-            ilmu dan seni melindungi informasi dengan mengubah data asli (plaintext)
-            menjadi kode yang tidak dapat dimengerti (ciphertext)
-            menggunakan algoritma dan kunci.
-        </p>
-
-        <button class="btn-start">
-            Get Started
-        </button>
+        <div class="user-info">
+            <div class="user-avatar">
+                @php
+                    $userName = session('user_name', session('user'));
+                    $initials = strtoupper(substr($userName, 0, 1));
+                @endphp
+                <span class="avatar-initial">{{ $initials }}</span>
+            </div>
+            <span class="user-name">{{ $userName }}</span>
+        </div>
     </div>
-
-    <div class="hero-img">
-        <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" width="200">
-    </div>
-
 </div>
 
 <style>
-
-.hero{
-background:#111;
-color:white;
-border-radius:18px;
-padding:40px;
-margin-bottom:30px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+.topbar-minimal {
+    background: #111316;
+    color: white;
+    border-radius: 12px;
+    padding: 16px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.hero-text h1{
-font-size:28px;
-margin-bottom:10px;
+.topbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.hero-text p{
-color:#cbd5e1;
-line-height:1.6;
-margin-bottom:20px;
-max-width:500px;
+.web-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 600;
 }
 
-.btn-start{
-background:#2b2b2b;
-border:none;
-padding:10px 22px;
-border-radius:10px;
-color:white;
-cursor:pointer;
-transition:0.2s;
+.web-name i {
+    color: #38bdf8;
+    font-size: 20px;
 }
 
-.btn-start:hover{
-background:#444;
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-.hero-img img{
-opacity:0.9;
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
 }
 
+.user-name {
+    font-size: 14px;
+    color: #e2e8f0;
+}
+
+@media (max-width: 640px) {
+    .topbar-content {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .web-name {
+        font-size: 16px;
+    }
+
+    .user-info {
+        gap: 8px;
+    }
+}
 </style>

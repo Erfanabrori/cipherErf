@@ -20,7 +20,10 @@
 <span class="text">Profile</span>
 </a>
 
-
+<a class="{{ request()->routeIs('users') ? 'active' : '' }}" href="{{ route('users') }}">
+<i class="fa-solid fa-users icon"></i>
+<span class="text">Daftar Pengguna</span>
+</a>
 
 <a class="{{ request()->routeIs('caesar') ? 'active' : '' }}" href="{{ route('caesar') }}">
 <i class="fa-solid fa-key icon"></i>
