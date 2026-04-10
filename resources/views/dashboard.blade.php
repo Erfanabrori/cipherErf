@@ -4,11 +4,6 @@
 @include('components.topbar')
 
 <div class="hero-cards">
-    <div class="dashboard-intro">
-        <h2>Selamat datang, {{ session('user') }}</h2>
-        <p>Semua tools kriptografi tersedia di sidebar. Gunakan dashboard ini sebagai ringkasan cepat dan akses langsung ke fitur utama.</p>
-    </div>
-
     <div class="cards">
         <a href="{{ route('dashboard') }}" class="card card-link">
             <h3><i class="fa-solid fa-gauge-high"></i> Dashboard</h3>
