@@ -36,6 +36,11 @@ class KriptoController extends Controller
         ]);
     }
 
+    public function processJson(Request $request)
+    {
+        return $this->process($request);
+    }
+
     private function caesarCipher($text, $shift)
     {
         $result = '';

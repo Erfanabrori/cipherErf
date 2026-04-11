@@ -7,45 +7,6 @@ use App\Models\Pengguna;
 
 class PenggunaController extends Controller
 {
-    public function loginForm()
-    {
-        return view('login');
-    }
-
-    public function login(Request $request)
-    {
-        $user = Pengguna::where('email', $request->email)
-                ->where('password', $request->password)
-                ->first();
-
-        if ($user) {
-            session([
-                'user' => $user->email,
-                'user_name' => $user->nama,
-                'id' => $user->id
-            ]);
-
-            return redirect('/dashboard');
-        }
-
-        return back()->with('error','Email atau Password salah');
-    }
-
-    public function dashboard()
-    {
-        if (!session()->has('user')) {
-            return redirect('/login');
-        }
-
-        return view('dashboard');
-    }
-
-    public function logout()
-    {
-        session()->flush();
-        return redirect('/login');
-    }
-
     public function index()
     {
         $pengguna = Pengguna::all();
@@ -59,7 +20,12 @@ class PenggunaController extends Controller
 
     public function create(Request $request)
     {
-        // Simpan pengguna baru
-        return Pengguna::create($request->all());
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:pengguna,email',
+            'password' => 'required|string|min:6',
+        ]);
+
+        return Pengguna::create($request->only(['nama', 'email', 'password']));
     }
 }

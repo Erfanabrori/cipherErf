@@ -3,51 +3,59 @@
 @section('content')
 @include('components.topbar')
 
-<div class="min-h-screen bg-gray-100 p-6">
-    <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-4xl mx-auto">
-        <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Daftar Pengguna</h2>
+<!-- BOOTSTRAP CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <p class="text-green-600 font-semibold mb-2 text-center">Login berhasil</p>
-        <p class="text-gray-700 mb-6 text-center">
-            Selamat datang, <span class="font-semibold">{{ session('user') }}</span>
-        </p>
+<div class="container py-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
 
-        <!-- TABEL DATA -->
-        <div class="overflow-x-auto rounded-lg border border-gray-300 shadow-sm">
-            <table class="min-w-full border-collapse text-sm text-left">
-                <thead class="bg-gray-100 text-gray-700 uppercase text-xs tracking-wider">
-                    <tr>
-                        <th class="px-4 py-3 border-b border-gray-200">ID</th>
-                        <th class="px-4 py-3 border-b border-gray-200">Email</th>
-                        <th class="px-4 py-3 border-b border-gray-200">Created At</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-200 bg-white">
-                    @forelse($pengguna as $user)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-3 border-b border-gray-200">{{ $user->id_pengguna ?? $user->id }}</td>
-                        <td class="px-4 py-3 border-b border-gray-200">{{ $user->email }}</td>
-                        <td class="px-4 py-3 border-b border-gray-200">{{ $user->created_at ?? '-' }}</td>
-                    </tr>
-                    @empty
-                    <tr>
-                        <td class="px-4 py-4 text-center text-gray-500" colspan="3">Tidak ada data pengguna.</td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
+            <h2 class="text-center fw-bold mb-3">Daftar Pengguna</h2>
+
+            <div class="text-center mb-4">
+                <p class="text-success fw-semibold mb-1">Login berhasil</p>
+                <p class="text-muted">
+                    Selamat datang, <span class="fw-bold">{{ session('user') }}</span>
+                </p>
+            </div>
+
+            <!-- TABEL DATA -->
+            <div class="table-responsive">
+                <table class="table table-hover align-middle text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($pengguna as $user)
+                        <tr>
+                            <td>{{ $user->id_pengguna ?? $user->id }}</td>
+                            <td>{{ $user->email }}</td>
+                            <td>{{ $user->created_at ?? '-' }}</td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="3" class="text-muted">Tidak ada data pengguna.</td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- LOGOUT -->
+            <form action="/logout" method="POST" class="mt-4">
+                @csrf
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-danger fw-semibold">
+                        Logout
+                    </button>
+                </div>
+            </form>
+
         </div>
-
-        <!-- LOGOUT -->
-        <form action="/logout" method="POST" class="mt-6">
-            @csrf
-            <button 
-                type="submit" 
-                class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
-            >
-                Logout
-            </button>
-        </form>
     </div>
 </div>
 

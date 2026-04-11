@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\KriptoController;
 
@@ -13,14 +14,14 @@ use App\Http\Controllers\KriptoController;
 Route::redirect('/', '/login');
 
 // ================= LOGIN =================
-Route::get('/login', [PenggunaController::class, 'loginForm'])->name('login');
-Route::post('/login', [PenggunaController::class, 'login']);
-Route::post('/logout', [PenggunaController::class, 'logout'])->name('logout');
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // ================= DASHBOARD =================
-Route::get('/dashboard', [PenggunaController::class, 'dashboard'])
-->name('dashboard');
+Route::get('/dashboard', [AuthController::class, 'dashboard'])
+    ->name('dashboard');
 
 
 
