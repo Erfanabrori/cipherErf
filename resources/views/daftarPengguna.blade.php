@@ -12,12 +12,19 @@
 
             <h2 class="text-center fw-bold mb-3">Daftar Pengguna</h2>
 
-            <div class="text-center mb-4">
-                <p class="text-success fw-semibold mb-1">Login berhasil</p>
-                <p class="text-muted">
-                    Selamat datang, <span class="fw-bold">{{ session('user') }}</span>
-                </p>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <p class="text-success fw-semibold mb-1">Login berhasil</p>
+                    <p class="text-muted">
+                        Selamat datang, <span class="fw-bold">{{ session('user') }}</span>
+                    </p>
+                </div>
+                <a href="{{ route('pengguna.create') }}" class="btn btn-primary">Tambah Pengguna</a>
             </div>
+
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
 
             <!-- TABEL DATA -->
             <div class="table-responsive">
@@ -27,18 +34,28 @@
                             <th>ID</th>
                             <th>Email</th>
                             <th>Created At</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($pengguna as $user)
                         <tr>
-                            <td>{{ $user->id_pengguna ?? $user->id }}</td>
+                            <td>{{ $user->id }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->created_at ?? '-' }}</td>
+                            <td>
+                                <a href="{{ route('pengguna.show', $user->id) }}" class="btn btn-info btn-sm">Lihat</a>
+                                <a href="{{ route('pengguna.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('pengguna.destroy', $user->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus pengguna ini?')">Hapus</button>
+                                </form>
+                            </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3" class="text-muted">Tidak ada data pengguna.</td>
+                            <td colspan="4" class="text-muted">Tidak ada data pengguna.</td>
                         </tr>
                         @endforelse
                     </tbody>

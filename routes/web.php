@@ -26,8 +26,8 @@ Route::get('/dashboard', [AuthController::class, 'dashboard'])
 
 
 // ================= PENGGUNA =================
+Route::resource('pengguna', PenggunaController::class);
 Route::get('/halo-maba-sti', [PenggunaController::class, 'index']);
-Route::post('/simpan-pengguna', [PenggunaController::class, 'create']);
 
 // ================= CAESAR =================
 Route::get('/caesar/{jenis?}', [KriptoController::class, 'index'])->name('caesar');

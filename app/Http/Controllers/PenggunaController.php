@@ -18,14 +18,66 @@ class PenggunaController extends Controller
         return view('profil');
     }
 
-    public function create(Request $request)
+    public function create()
+    {
+        return view('pengguna.create');
+    }
+
+    public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama' => 'nullable|string|max:255',
             'email' => 'required|email|unique:pengguna,email',
             'password' => 'required|string|min:6',
         ]);
 
-        return Pengguna::create($request->only(['nama', 'email', 'password']));
+        $data = $request->only(['email', 'password']);
+        if ($request->filled('nama')) {
+            $data['nama'] = $request->nama;
+        }
+
+        Pengguna::create($data);
+
+        return redirect()->route('users')->with('success', 'Pengguna berhasil ditambahkan');
+    }
+
+    public function show($id)
+    {
+        $pengguna = Pengguna::findOrFail($id);
+        return view('pengguna.show', compact('pengguna'));
+    }
+
+    public function edit($id)
+    {
+        $pengguna = Pengguna::findOrFail($id);
+        return view('pengguna.edit', compact('pengguna'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $pengguna = Pengguna::findOrFail($id);
+
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:pengguna,email,' . $id,
+            'password' => 'nullable|string|min:6',
+        ]);
+
+        $data = $request->only(['nama', 'email']);
+        if ($request->filled('password')) {
+            $data['password'] = $request->password;
+        }
+
+        $pengguna->update($data);
+
+        return redirect()->route('users')->with('success', 'Pengguna berhasil diperbarui');
+    }
+
+    public function destroy($id)
+    {
+        $pengguna = Pengguna::findOrFail($id);
+        $pengguna->delete();
+
+        return redirect()->route('users')->with('success', 'Pengguna berhasil dihapus');
     }
 }
