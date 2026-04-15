@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Pengguna;
 
 class AuthController extends Controller
@@ -19,15 +20,13 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        $user = Pengguna::where('email', $request->email)
-                ->where('password', $request->password)
-                ->first();
+        $user = Pengguna::where('email', $request->email)->first();
 
-        if ($user) {
+        if ($user && Hash::check($request->password, $user->password)) {
             session([
                 'user' => $user->email,
                 'user_name' => $user->nama,
-                'id' => $user->id_pengguna ?? $user->id,
+                'id' => $user->id,
             ]);
 
             return redirect('/dashboard');
