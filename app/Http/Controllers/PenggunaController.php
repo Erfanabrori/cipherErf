@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Pengguna;
 
 class PenggunaController extends Controller
@@ -25,18 +26,15 @@ class PenggunaController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nama' => 'nullable|string|max:255',
             'email' => 'required|email|unique:pengguna,email',
             'password' => 'required|string|min:6',
         ]);
 
-        $data = $request->only(['email', 'password']);
-        if ($request->filled('nama')) {
-            $data['nama'] = $request->nama;
-        }
+        $validated['password'] = Hash::make($validated['password']);
 
-        Pengguna::create($data);
+        Pengguna::create($validated);
 
         return redirect()->route('users')->with('success', 'Pengguna berhasil ditambahkan');
     }
@@ -65,7 +63,7 @@ class PenggunaController extends Controller
 
         $data = $request->only(['nama', 'email']);
         if ($request->filled('password')) {
-            $data['password'] = $request->password;
+            $data['password'] = Hash::make($request->password);
         }
 
         $pengguna->update($data);
